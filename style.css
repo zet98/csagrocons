@@ -327,7 +327,17 @@ footer h3{
     width: 8em;
 }
 
-
+nav{
+    position: relative;
+    margin: auto;
+    margin-top: 60px;
+    margin-left: 9vw;
+    width: 90vw;
+    height: 700px;
+    max-width: 80%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
 
 .grid a.icon:hover {
     background: none;
@@ -402,7 +412,8 @@ footer h3{
     display: flex;
     position: absolute;
     opacity: 70%;
-    float: left;;
+    float: left;
+    width: ;
 }
 
 }

@@ -18,6 +18,7 @@ body{
     width: 10em;
     margin-left: 6vw;
     margin-right: 6vw;
+    padding-left: 60px;
 }
 
 .grid a{
@@ -315,59 +316,54 @@ footer h3{
 }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1100px) {
 .gridArticle{
         display: inline-block;
     }
-
-.grid{
-    overflow: hidden;
-    padding-top: 10%;
-    margin-left: 35%;
-    text-align: center;
-}
-
-.grid #myLinks {
-    display: none;
-}
-
-.grid a{
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    display: block;
-    margin: 10px;
-}
-
-.grid a.icon {
-    position: absolute;
-    right: 10%;
-    left: 10%;
-    top: 0;
-  }
-
 .grid img{
-    width: 8em;
+    padding-left: 0;
 }
-
 nav{
     position: relative;
     margin: auto;
-    margin-top: 60px;
-    margin-left: 9vw;
-    width: 90vw;
+    margin-left: 0;
     height: 700px;
-    max-width: 80%;
     overflow: hidden;
     box-sizing: border-box;
 }
 
-.grid a.icon:hover {
-    background: none;
+nav h2{
+    top: 90px;
+    left: 10px;
+    font-size: 30px;
+    text-align: left;
+}
+
+nav p{
+    top: 200px;
+    position: relative;
+    font-size: 1.2em;
+    max-width: 20em;
+    text-align: left;
+}
+
+form{
+    position: relative;
+    left: 16%;
+}
+
+.grid a{
+    font-size: 100%;
 }
 
 .mapa1{
     display: none;
+}
+
+.gridArticle li{
+    list-style: none;
+    font-size: 0.9em;
+    padding-right: 15px;
 }
 
 .card1{

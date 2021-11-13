@@ -251,7 +251,7 @@ footer h3{
     text-align: center;
     padding-top: 2em;
     margin-top: 0;
-    padding-top: ;
+    padding-top:;
 }
 
 .footerContainer{
@@ -340,17 +340,18 @@ body{
     display: inline-block;
     width: 90vw;
     bottom: 0;
-    left: 0;
+    left: 10px;
     z-index:-1;
     overflow-x: hidden;
 }
 
 article{
     background: white;
-        overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 article svg{
+    top: 0;
     display: inline-block;
     overflow: none;
 }
@@ -442,7 +443,6 @@ form{
 
 footer{
     position: relative;
-
 }
 
 footer h3{
@@ -451,17 +451,12 @@ footer h3{
     font-size: 17px;
 }
 
-footer svg{
-    position: relative;
-}
-
 .footer ul{
     position: relative;
 }
 
 .footerContainer{
     position: relative;
-
     width: 15em;
     height: 8em;
     margin: auto;

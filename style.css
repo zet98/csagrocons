@@ -336,24 +336,33 @@ body{
 }
 
 .mobilebg{
+    background: #D7E4D7;
     position: absolute;
     display: inline-block;
-    width: 90vw;
+    width: 85vw;
     bottom: 0;
-    left: 10px;
+    left: 28px;
     z-index:-1;
     overflow-x: hidden;
 }
 
+nav{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
 article{
-    background: white;
+    margin-top: 0;
+    position: relative;
+    top: 0;
+    background: rgb(255, 255, 255);
     overflow-x: hidden;
 }
 
 article svg{
-    top: 0;
-    display: inline-block;
-    overflow: none;
+    display: flex;
+    margin-top: -2px;
+    overflow: hidden;
 }
 
 .svg{

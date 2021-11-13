@@ -1,6 +1,6 @@
 html {
     scroll-behavior: smooth;
-  }
+}
 
 body{
     margin: 0;
@@ -51,6 +51,7 @@ nav img{
     position: relative;
     width: 70em;
     float: right;
+    z-index:-1;
 }
 
 .mobile{
@@ -310,6 +311,17 @@ footer h3{
     padding-right: 5px;
 }
 
+.mobilebg{
+    display: none;
+}
+
+article svg{
+    display: none;
+}
+
+footer svg{
+    display: none;
+}
 
 @media screen and (max-width: 1100px){
 .Img{
@@ -319,12 +331,46 @@ footer h3{
 }
 
 @media screen and (max-width: 1100px) {
+body{
+    background-color:#D7E4D7;
+}
+
+.mobilebg{
+    position: absolute;
+    display: inline-block;
+    width: 90vw;
+    bottom: 0;
+    left: 0;
+    z-index:-1;
+    overflow-x: hidden;
+}
+
+article{
+    background: white;
+        overflow-x: hidden;
+}
+
+article svg{
+    display: inline-block;
+    overflow: none;
+}
+
+.svg{
+    display: none;
+}
+
+footer{
+    background: white;
+}
+
 .gridArticle{
-        display: inline-block;
-    }
+    display: inline-block;
+
+}
 .grid img{
     padding-left: 0;
 }
+
 nav{
     position: relative;
     margin: auto;
@@ -350,7 +396,7 @@ nav p{
 }
 
 form{
-    position: relative;
+    display: none;
 }
 
 .grid a{
@@ -394,19 +440,35 @@ form{
     margin: 10vw;
 }
 
-footer h3{
-    text-align: center;
-    padding-top: 2em;
+footer{
+    position: relative;
+
 }
 
+footer h3{
+    position: relative;
+    text-align: center;
+    font-size: 17px;
+}
+
+footer svg{
+    position: relative;
+}
+
+.footer ul{
+    position: relative;
+}
 
 .footerContainer{
+    position: relative;
+
     width: 15em;
     height: 8em;
     margin: auto;
     max-width: 100%;
-    background: rgba(255, 255, 255, 0.946);
+    background: white;
     border-radius: 15px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.295);
+    box-shadow: none;
     padding-bottom: 100px;
+}
 }

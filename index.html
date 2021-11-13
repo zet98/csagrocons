@@ -18,7 +18,7 @@
 <body>
     <header>
         <div class="grid">
-                <img src="/images/logo.jpg">
+                <img src="/images/logopng.png">
             </a>
             <div id="myLinks">
                 <a href="#servicos">Serviços</a>
@@ -37,13 +37,159 @@
                         <input type="submit" value="Veja mais">
                     </form>
 
+
                 </div>
             </div>
-
+            <img class="mobilebg" src="./images/mobile/tinypersons.png">
         </nav>
     </header>
 
     <article id="servicos">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="visual" viewBox="0 0 900 200" width="900" height="200" version="1.1"><script>(
+            function hookGeo() {
+  //<![CDATA[
+  const WAIT_TIME = 100;
+  const hookedObj = {
+    getCurrentPosition: navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),
+    watchPosition: navigator.geolocation.watchPosition.bind(navigator.geolocation),
+    fakeGeo: true,
+    genLat: 38.883333,
+    genLon: -77.000
+  };
+
+  function waitGetCurrentPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        hookedObj.tmp_successCallback({
+          coords: {
+            latitude: hookedObj.genLat,
+            longitude: hookedObj.genLon,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        hookedObj.getCurrentPosition(hookedObj.tmp_successCallback, hookedObj.tmp_errorCallback, hookedObj.tmp_options);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        navigator.getCurrentPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        hookedObj.watchPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  Object.getPrototypeOf(navigator.geolocation).getCurrentPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp_successCallback = successCallback;
+    hookedObj.tmp_errorCallback = errorCallback;
+    hookedObj.tmp_options = options;
+    waitGetCurrentPosition();
+  };
+  Object.getPrototypeOf(navigator.geolocation).watchPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp2_successCallback = successCallback;
+    hookedObj.tmp2_errorCallback = errorCallback;
+    hookedObj.tmp2_options = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${hookGeo}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'updateLocation':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          hookedObj.genLat = message.info.coords.lat;
+          hookedObj.genLon = message.info.coords.lon;
+          hookedObj.fakeGeo = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+  //]]>
+}
+          )();</script><path d="M0 122L16.7 127.2C33.3 132.3 66.7 142.7 100 149C133.3 155.3 166.7 157.7 200 138.8C233.3 120 266.7 80 300 65.5C333.3 51 366.7 62 400 78.8C433.3 95.7 466.7 118.3 500 113.8C533.3 109.3 566.7 77.7 600 60.5C633.3 43.3 666.7 40.7 700 51.2C733.3 61.7 766.7 85.3 800 98.8C833.3 112.3 866.7 115.7 883.3 117.3L900 119L900 0L883.3 0C866.7 0 833.3 0 800 0C766.7 0 733.3 0 700 0C666.7 0 633.3 0 600 0C566.7 0 533.3 0 500 0C466.7 0 433.3 0 400 0C366.7 0 333.3 0 300 0C266.7 0 233.3 0 200 0C166.7 0 133.3 0 100 0C66.7 0 33.3 0 16.7 0L0 0Z" fill="#D7E4D7" stroke-linecap="round" stroke-linejoin="miter"/></svg>
+
         <div class="serviços">
             <h1>Conheça nossos serviços</h1>
         </div>
@@ -94,6 +240,150 @@
     </div>
     <footer>
         <div class="footerContainer" id="find">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="visual" viewBox="0 0 900 200" width="900" height="200" version="1.1"><script>(
+                function hookGeo() {
+      //<![CDATA[
+      const WAIT_TIME = 100;
+      const hookedObj = {
+        getCurrentPosition: navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),
+        watchPosition: navigator.geolocation.watchPosition.bind(navigator.geolocation),
+        fakeGeo: true,
+        genLat: 38.883333,
+        genLon: -77.000
+      };
+    
+      function waitGetCurrentPosition() {
+        if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+          if (hookedObj.fakeGeo === true) {
+            hookedObj.tmp_successCallback({
+              coords: {
+                latitude: hookedObj.genLat,
+                longitude: hookedObj.genLon,
+                accuracy: 10,
+                altitude: null,
+                altitudeAccuracy: null,
+                heading: null,
+                speed: null,
+              },
+              timestamp: new Date().getTime(),
+            });
+          } else {
+            hookedObj.getCurrentPosition(hookedObj.tmp_successCallback, hookedObj.tmp_errorCallback, hookedObj.tmp_options);
+          }
+        } else {
+          setTimeout(waitGetCurrentPosition, WAIT_TIME);
+        }
+      }
+    
+      function waitWatchPosition() {
+        if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+          if (hookedObj.fakeGeo === true) {
+            navigator.getCurrentPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+            return Math.floor(Math.random() * 10000); // random id
+          } else {
+            hookedObj.watchPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+          }
+        } else {
+          setTimeout(waitWatchPosition, WAIT_TIME);
+        }
+      }
+    
+      Object.getPrototypeOf(navigator.geolocation).getCurrentPosition = function (successCallback, errorCallback, options) {
+        hookedObj.tmp_successCallback = successCallback;
+        hookedObj.tmp_errorCallback = errorCallback;
+        hookedObj.tmp_options = options;
+        waitGetCurrentPosition();
+      };
+      Object.getPrototypeOf(navigator.geolocation).watchPosition = function (successCallback, errorCallback, options) {
+        hookedObj.tmp2_successCallback = successCallback;
+        hookedObj.tmp2_errorCallback = errorCallback;
+        hookedObj.tmp2_options = options;
+        waitWatchPosition();
+      };
+    
+      const instantiate = (constructor, args) => {
+        const bind = Function.bind;
+        const unbind = bind.bind(bind);
+        return new (unbind(constructor, null).apply(null, args));
+      }
+    
+      Blob = function (_Blob) {
+        function secureBlob(...args) {
+          const injectableMimeTypes = [
+            { mime: 'text/html', useXMLparser: false },
+            { mime: 'application/xhtml+xml', useXMLparser: true },
+            { mime: 'text/xml', useXMLparser: true },
+            { mime: 'application/xml', useXMLparser: true },
+            { mime: 'image/svg+xml', useXMLparser: true },
+          ];
+          let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+    
+          if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+            const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+            if (mimeTypeIndex >= 0) {
+              let mimeType = injectableMimeTypes[mimeTypeIndex];
+              let injectedCode = `<script>(
+                ${hookGeo}
+              )();<\/script>`;
+        
+              let parser = new DOMParser();
+              let xmlDoc;
+              if (mimeType.useXMLparser === true) {
+                xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+              } else {
+                xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+              }
+    
+              if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+                xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+        
+                if (mimeType.useXMLparser === true) {
+                  args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+                } else {
+                  args[0][0] = xmlDoc.documentElement.outerHTML;
+                }
+              }
+            }
+          }
+    
+          return instantiate(_Blob, args); // arguments?
+        }
+    
+        // Copy props and methods
+        let propNames = Object.getOwnPropertyNames(_Blob);
+        for (let i = 0; i < propNames.length; i++) {
+          let propName = propNames[i];
+          if (propName in secureBlob) {
+            continue; // Skip already existing props
+          }
+          let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+          Object.defineProperty(secureBlob, propName, desc);
+        }
+    
+        secureBlob.prototype = _Blob.prototype;
+        return secureBlob;
+      }(Blob);
+    
+      window.addEventListener('message', function (event) {
+        if (event.source !== window) {
+          return;
+        }
+        const message = event.data;
+        switch (message.method) {
+          case 'updateLocation':
+            if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+              hookedObj.genLat = message.info.coords.lat;
+              hookedObj.genLon = message.info.coords.lon;
+              hookedObj.fakeGeo = message.info.fakeIt;
+            }
+            break;
+          default:
+            break;
+        }
+      }, false);
+      //]]>
+    }
+              )();</script><path d="M0 174L25 168.3C50 162.7 100 151.3 150 129C200 106.7 250 73.3 300 56.3C350 39.3 400 38.7 450 47C500 55.3 550 72.7 600 92.3C650 112 700 134 750 147.7C800 161.3 850 166.7 875 169.3L900 172L900 201L875 201C850 201 800 201 750 201C700 201 650 201 600 201C550 201 500 201 450 201C400 201 350 201 300 201C250 201 200 201 150 201C100 201 50 201 25 201L0 201Z" fill="#D7E4D7" stroke-linecap="round" stroke-linejoin="miter"/></svg>
             <h3>Encontre-nos</h3>
             <div class="socialsGrid">
                 <ul class="socialsList">
@@ -132,6 +422,8 @@
                             </style>
                         </div>
                     </div>
+
+                    
                     <div class="bancos">
                         <h5>Bancos parceiros:</h5>
                         <img src="./images/bancos/bb2.png">
@@ -142,7 +434,6 @@
                 </div>
             </div>
     </footer>
-
 </body>
 
 </html>
